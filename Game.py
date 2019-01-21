@@ -10,10 +10,10 @@ class TicTacToe:
         self.draw_board()
 
     def draw_board(self):
-        line_1 = self.canvas.create_line(100, 0, 100, 300)
-        line_2 = self.canvas.create_line(200, 0, 200, 300)
-        line_3 = self.canvas.create_line(0, 100, 300, 100)
-        line_4 = self.canvas.create_line(0, 200, 300, 200)
+        self.canvas.create_line(100, 0, 100, 300)
+        self.canvas.create_line(200, 0, 200, 300)
+        self.canvas.create_line(0, 100, 300, 100)
+        self.canvas.create_line(0, 200, 300, 200)
 
 
 

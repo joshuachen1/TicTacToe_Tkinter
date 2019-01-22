@@ -6,22 +6,30 @@ class TicTacToe:
     def __init__(self, master):
         self.root = master
 
+        # ***** Board *****
+        self.board = [[(' ') for i in range(3)] for i in range(3)]
+
+        self.current_turn = 1
+        self.current_player = 1
+
+        self.game_log = list()
+
         # ***** Scoreboard *****
-        self.player1_score = 0
+        self.p1_points = 0
         self.player1_score = StringVar()
-        self.player1_score.set("Player 1: {}".format(self.player1_score))
-        self.p1_score_display = Label(self.root, textvariable=self.player1_score, bd=1, relief=SUNKEN, anchor=W)
+        self.player1_score.set("Player 1\n--------\n{}".format(self.p1_points))
+        self.p1_score_display = Label(self.root, textvariable=self.player1_score, bd=1, relief=SUNKEN)
         self.p1_score_display.pack(side=LEFT, padx=2, fill=X)
 
-        self.player2_score = 0
+        self.p2_points = 0
         self.player2_score = StringVar()
-        self.player2_score.set("Player 2: {}".format(self.player2_score))
-        self.p2_score_display = Label(self.root, textvariable=self.player2_score, bd=1, relief=SUNKEN, anchor=W)
+        self.player2_score.set("Player 2\n--------\n{}".format(self.p2_points))
+        self.p2_score_display = Label(self.root, textvariable=self.player2_score, bd=1, relief=SUNKEN)
         self.p2_score_display.pack(side=RIGHT, padx=2, fill=X)
 
         # ***** Bottom Player Message *****
         self.player_turn_message = StringVar()
-        self.player_turn_message.set("Player 1's Turn")
+        self.player_turn_message.set("Player {}'s Turn".format(self.current_player))
         self.player_turn = Label(self.root, textvariable=self.player_turn_message, bd=1, relief=SUNKEN)
         self.player_turn.pack(side=BOTTOM, padx=2, fill=X)
 
@@ -42,14 +50,6 @@ class TicTacToe:
         moves_menu = Menu(main_menu)
         main_menu.add_cascade(label="Moves", menu=moves_menu)
         moves_menu.add_command(label="Game Log", command=self.display_game_log)
-
-        # ***** Board *****
-        self.board = [[(' ') for i in range(3)] for i in range(3)]
-
-        self.current_turn = 1
-        self.current_player = 1
-
-        self.game_log = list()
 
         # ***** Colorized Board *****
         self.canvas_00 = Canvas(self.canvas, width=100, height=100, bg='red')
@@ -376,10 +376,18 @@ class TicTacToe:
                 winner_declared = True
                 game_over = True
 
-        if not winner_declared and self.current_turn == 10:
+        if not winner_declared and self.current_turn > 9:
             self.player_turn_message.set("Cat's Game! Game Over.")
             self.game_log.append("Cat's Game! Game Over.")
             game_over = True
+
+        if winner_declared:
+            if self.current_player == 1:
+                self.p1_points += 1
+                self.player1_score.set("Player 1\n--------\n{}".format(self.p1_points))
+            else:
+                self.p2_points += 1
+                self.player2_score.set("Player 2\n--------\n{}".format(self.p2_points))
 
         if game_over:
             replay = messagebox.askquestion("Rematch", "Play again?")

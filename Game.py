@@ -270,39 +270,39 @@ class TicTacToe:
         if self.board[0][0] != ' ':
             if (self.board[0][0] == self.board[0][1] and self.board[0][0] == self.board[0][2] and
                     self.board[0][0] == self.board[1][0] and self.board[0][0] == self.board[2][0]):
-                self.game_log.append("Player {} matched the left column and top row!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the left column and top row!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the left column and top row!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the left column and top row!\n\nPlayer {} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Top Row
             elif self.board[0][0] == self.board[0][1] and self.board[0][0] == self.board[0][2]:
-                self.game_log.append("Player {} matched the top row!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the top row!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the top row!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the top row!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Left Column
             elif self.board[0][0] == self.board[1][0] and self.board[0][0] == self.board[2][0]:
-                self.game_log.append("Player {} matched the left column!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the left column!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the left column!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the left column!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
@@ -312,26 +312,26 @@ class TicTacToe:
         if self.board[2][2] != ' ':
             if (self.board[2][2] == self.board[2][0] and self.board[2][2] == self.board[2][1] and
                     self.board[2][2] == self.board[0][2] and self.board[2][2] == self.board[1][2]):
-                self.game_log.append("Player {} match the bottom row and right column!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} match the bottom row and right column!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} match the bottom row and right column!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} match the bottom row and right column!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Bottom Row
             elif self.board[2][2] == self.board[2][0] and self.board[2][2] == self.board[2][1]:
-                self.game_log.append("Player {} match the bottom row!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} match the bottom row!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} match the bottom row!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} match the bottom row!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
@@ -355,39 +355,39 @@ class TicTacToe:
             # Cross
             if (self.board[1][1] == self.board[0][0] and self.board[1][1] == self.board[2][2] and
                     self.board[1][1] == self.board[0][2] and self.board[1][1] == self.board[2][0]):
-                self.game_log.append("Player {} matched a cross!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched a cross!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched a cross!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched a cross!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Left Diagonal
             elif self.board[1][1] == self.board[0][0] and self.board[1][1] == self.board[2][2]:
-                self.game_log.append("Player {} matched the left diagonal!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the left diagonal!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the left diagonal!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the left diagonal!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Right Diagonal
             elif self.board[1][1] == self.board[0][2] and self.board[1][1] == self.board[2][0]:
-                self.game_log.append("Player {} matched the right diagonal!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the right diagonal!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the right diagonal!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the right diagonal!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
@@ -395,39 +395,39 @@ class TicTacToe:
             # Plus-Shape
             if (self.board[1][1] == self.board[0][1] and self.board[1][1] == self.board[2][1] and
                     self.board[1][1] == self.board[1][0] and self.board[1][1] == self.board[1][2]):
-                self.game_log.append("Player {} matched a plus shape!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched a plus shape!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched a plus shape!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched a plus shape!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Middle Column
             elif self.board[1][1] == self.board[0][1] and self.board[1][1] == self.board[2][1]:
-                self.game_log.append("Player {} matched the middle column!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the middle column!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the middle column!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the middle column!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
 
             # Middle Row
             elif self.board[1][1] == self.board[1][0] and self.board[1][1] == self.board[1][2]:
-                self.game_log.append("Player {} matched the middle row!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} matched the middle row!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} matched the middle row!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} matched the middle row!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
 
                 winner_declared = True
@@ -463,7 +463,7 @@ class TicTacToe:
     def new_game(self):
         self.board = [[(' ') for i in range(3)] for i in range(3)]
         self.current_turn = 1
-        self.current_player = 1
+        self.current_player = self.p1_ID
         self.player_turn_message.set("Player 1's Turn")
         self.canvas_00.delete(ALL)
         self.canvas_01.delete(ALL)

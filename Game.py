@@ -1,17 +1,32 @@
-from tkinter import Tk, Canvas, Label, StringVar, BOTTOM, SUNKEN, W, X, Y
+from tkinter import Tk, Canvas, Label, StringVar, BOTTOM, SUNKEN, W, X, Y, Menu, ALL, messagebox
 
 
 class TicTacToe:
 
     def __init__(self, master):
+        self.root = master
         self.canvas = Canvas(master, width=300, height=300)
         self.canvas.pack()
 
-        self.board = [[' ', ' ', ' '],
-                      [' ', ' ', ' '],
-                      [' ', ' ', ' ']]
+        main_menu = Menu(master)
+        master.config(menu=main_menu)
+
+        game_menu = Menu(main_menu)
+        main_menu.add_cascade(label="Game", menu=game_menu)
+        game_menu.add_command(label="New Game", command=self.new_game)
+        game_menu.add_separator()
+        game_menu.add_command(label="Exit", command=self.quit)
+
+        moves_menu = Menu(main_menu)
+        main_menu.add_cascade(label="Moves", menu=moves_menu)
+        moves_menu.add_command(label="Game Log", command=self.display_game_log)
+
+        self.board = [[(' ') for i in range(3)] for i in range(3)]
 
         self.current_turn = 1
+        self.current_player = 1
+
+        self.game_log = list()
 
         self.player_turn_message = StringVar()
         self.player_turn_message.set("Player 1's Turn")
@@ -60,121 +75,159 @@ class TicTacToe:
         self.canvas_22.grid(row=2, column=2)
 
     def mark00(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_00.create_line(20, 20, 80, 80)
-            self.canvas_00.create_line(20, 80, 80, 20)
-            self.board[0][0] = 'X'
-        else:
-            self.canvas_00.create_oval(15, 15, 90, 90)
-            self.board[0][0] = 'O'
+        if self.board[0][0] == ' ':
+            if self.current_player == 1:
+                self.canvas_00.create_line(20, 20, 80, 80)
+                self.canvas_00.create_line(20, 80, 80, 20)
+                self.board[0][0] = 'X'
+            else:
+                self.canvas_00.create_oval(15, 15, 90, 90)
+                self.board[0][0] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at top left"
+                             .format(turn=self.current_turn, player=self.current_player, mark=self.board[0][0]))
+
+            self.update_player_turn()
 
     def mark01(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_01.create_line(20, 20, 80, 80)
-            self.canvas_01.create_line(20, 80, 80, 20)
-            self.board[0][1] = 'X'
-        else:
-            self.canvas_01.create_oval(15, 15, 90, 90)
-            self.board[0][1] = 'O'
+        if self.board[0][1] == ' ':
+            if self.current_player == 1:
+                self.canvas_01.create_line(20, 20, 80, 80)
+                self.canvas_01.create_line(20, 80, 80, 20)
+                self.board[0][1] = 'X'
+            else:
+                self.canvas_01.create_oval(15, 15, 90, 90)
+                self.board[0][1] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at top middle"
+                             .format(turn=self.current_turn, player=self.current_player, mark=self.board[0][1]))
+            self.update_player_turn()
 
     def mark02(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_02.create_line(20, 20, 80, 80)
-            self.canvas_02.create_line(20, 80, 80, 20)
-            self.board[0][2] = 'X'
-        else:
-            self.canvas_02.create_oval(15, 15, 90, 90)
-            self.board[0][2] = 'O'
+        if self.board[0][2] == ' ':
+            if self.current_player == 1:
+                self.canvas_02.create_line(20, 20, 80, 80)
+                self.canvas_02.create_line(20, 80, 80, 20)
+                self.board[0][2] = 'X'
+            else:
+                self.canvas_02.create_oval(15, 15, 90, 90)
+                self.board[0][2] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at top right"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[0][2]))
+            self.update_player_turn()
 
     def mark10(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_10.create_line(20, 20, 80, 80)
-            self.canvas_10.create_line(20, 80, 80, 20)
-            self.board[1][0] = 'X'
-        else:
-            self.canvas_10.create_oval(15, 15, 90, 90)
-            self.board[1][0] = 'O'
+        if self.board[1][0] == ' ':
+            if self.current_player == 1:
+                self.canvas_10.create_line(20, 20, 80, 80)
+                self.canvas_10.create_line(20, 80, 80, 20)
+                self.board[1][0] = 'X'
+            else:
+                self.canvas_10.create_oval(15, 15, 90, 90)
+                self.board[1][0] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at left middle"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[1][0]))
+            self.update_player_turn()
 
     def mark11(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_11.create_line(20, 20, 80, 80)
-            self.canvas_11.create_line(20, 80, 80, 20)
-            self.board[1][1] = 'X'
-        else:
-            self.canvas_11.create_oval(15, 15, 90, 90)
-            self.board[1][1] = 'O'
+        if self.board[1][1] == ' ':
+            if self.current_player == 1:
+                self.canvas_11.create_line(20, 20, 80, 80)
+                self.canvas_11.create_line(20, 80, 80, 20)
+                self.board[1][1] = 'X'
+            else:
+                self.canvas_11.create_oval(15, 15, 90, 90)
+                self.board[1][1] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at the center"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[1][1]))
+            self.update_player_turn()
 
     def mark12(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_12.create_line(20, 20, 80, 80)
-            self.canvas_12.create_line(20, 80, 80, 20)
-            self.board[1][2] = 'X'
-        else:
-            self.canvas_12.create_oval(15, 15, 90, 90)
-            self.board[1][2] = 'O'
+        if self.board[1][2] == ' ':
+            if self.current_player == 1:
+                self.canvas_12.create_line(20, 20, 80, 80)
+                self.canvas_12.create_line(20, 80, 80, 20)
+                self.board[1][2] = 'X'
+            else:
+                self.canvas_12.create_oval(15, 15, 90, 90)
+                self.board[1][2] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at right middle"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[1][2]))
+            self.update_player_turn()
 
     def mark20(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_20.create_line(20, 20, 80, 80)
-            self.canvas_20.create_line(20, 80, 80, 20)
-            self.board[2][0] = 'X'
-        else:
-            self.canvas_20.create_oval(15, 15, 90, 90)
-            self.board[2][0] = 'O'
+        if self.board[2][0] == ' ':
+            if self.current_player == 1:
+                self.canvas_20.create_line(20, 20, 80, 80)
+                self.canvas_20.create_line(20, 80, 80, 20)
+                self.board[2][0] = 'X'
+            else:
+                self.canvas_20.create_oval(15, 15, 90, 90)
+                self.board[2][0] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at bottom left"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[2][0]))
+            self.update_player_turn()
 
     def mark21(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_21.create_line(20, 20, 80, 80)
-            self.canvas_21.create_line(20, 80, 80, 20)
-            self.board[2][1] = 'X'
-        else:
-            self.canvas_21.create_oval(15, 15, 90, 90)
-            self.board[2][1] = 'O'
+        if self.board[2][1] == ' ':
+            if self.current_player == 1:
+                self.canvas_21.create_line(20, 20, 80, 80)
+                self.canvas_21.create_line(20, 80, 80, 20)
+                self.board[2][1] = 'X'
+            else:
+                self.canvas_21.create_oval(15, 15, 90, 90)
+                self.board[2][1] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at bottom middle"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[2][1]))
+            self.update_player_turn()
 
     def mark22(self, event):
-        if self.current_turn % 2 == 1:
-            self.canvas_22.create_line(20, 20, 80, 80)
-            self.canvas_22.create_line(20, 80, 80, 20)
-            self.board[2][2] = 'X'
-        else:
-            self.canvas_22.create_oval(15, 15, 90, 90)
-            self.board[2][2] = 'O'
+        if self.board[2][2] == ' ':
+            if self.current_player == 1:
+                self.canvas_22.create_line(20, 20, 80, 80)
+                self.canvas_22.create_line(20, 80, 80, 20)
+                self.board[2][2] = 'X'
+            else:
+                self.canvas_22.create_oval(15, 15, 90, 90)
+                self.board[2][2] = 'O'
 
-        self.update_player_turn()
+            self.game_log.append("({turn}): P-{player} placed {mark} at bottom right"
+                                 .format(turn=self.current_turn, player=self.current_player,
+                                         mark=self.board[2][2]))
+            self.update_player_turn()
 
     def update_player_turn(self):
 
         self.current_turn += 1
 
         if self.current_turn % 2 == 1:
-            self.player_turn_message.set("Player 1's Turn")
+            self.current_player = 1
         else:
-            self.player_turn_message.set("Player 2's Turn")
-            
+            self.current_player = 2
+
+        self.player_turn_message.set("Player {player}'s Turn".format(player=self.current_player))
+
         self.check_winner()
 
     def check_winner(self):
         current_player = self.current_turn % 2 + 1
         winner_declared = False
+        game_over = False
 
         for i in range(3):
-            print ("|", self.board[i][0], self.board[i][1], self.board[i][2], "|")
+            print("|", self.board[i][0], self.board[i][1], self.board[i][2], "|")
         print()
 
         # Top Left
@@ -183,13 +236,16 @@ class TicTacToe:
                 self.board[0][0] == self.board[1][0] and self.board[0][0] == self.board[2][0]):
                     self.player_turn_message.set("Player {} wins!".format(current_player))
                     winner_declared = True
+                    game_over = True
 
         # Bottom Right
         if self.board[2][2] != ' ':
             if (self.board[2][2] == self.board[2][0] and self.board[2][2] == self.board[2][1] or
                 self.board[2][2] == self.board[0][2] and self.board[2][2] == self.board[1][2]):
                     self.player_turn_message.set("Player {} wins!".format(current_player))
+                    self.game_log.append("Player {} wins!".format(current_player))
                     winner_declared = True
+                    game_over = True
 
         # Middle
         if self.board[1][1] != ' ':
@@ -197,16 +253,55 @@ class TicTacToe:
             if (self.board[1][1] == self.board[0][0] and self.board[1][1] == self.board[2][2] or
                 self.board[1][1] == self.board[0][2] and self.board[1][1] == self.board[2][0]):
                     self.player_turn_message.set("Player {} wins!".format(current_player))
+                    self.game_log.append("Player {} wins!".format(current_player))
                     winner_declared = True
+                    game_over = True
 
             # T-Shape
             if (self.board[1][1] == self.board[0][1] and self.board[1][1] == self.board[2][1] or
                 self.board[1][1] == self.board[1][0] and self.board[1][1] == self.board[1][2]):
                     self.player_turn_message.set("Player {} wins!".format(current_player))
+                    self.game_log.append("Player {} wins!".format(current_player))
                     winner_declared = True
+                    game_over = True
 
         if not winner_declared and self.current_turn == 10:
             self.player_turn_message.set("Cat's Game! Game Over.")
+            self.game_log.append("Cat's Game! Game Over.")
+            game_over = True
+
+        if game_over:
+            replay = messagebox.askquestion("Rematch", "Play again?")
+
+            if replay == 'yes':
+                self.new_game()
+            else:
+                messagebox.showinfo("", "Thanks for playing.")
+                self.quit()
+
+    def new_game(self):
+        self.board = [[(' ') for i in range(3)] for i in range(3)]
+        self.current_turn = 1
+        self.player_turn_message.set("Player 1's Turn")
+        self.canvas_00.delete(ALL)
+        self.canvas_01.delete(ALL)
+        self.canvas_02.delete(ALL)
+        self.canvas_10.delete(ALL)
+        self.canvas_11.delete(ALL)
+        self.canvas_12.delete(ALL)
+        self.canvas_20.delete(ALL)
+        self.canvas_21.delete(ALL)
+        self.canvas_22.delete(ALL)
+
+    def display_game_log(self):
+        game_history = ''
+        for i in range(len(self.game_log)):
+            game_history += self.game_log[i] + '\n'
+
+        messagebox.showinfo("Game Log", game_history)
+
+    def quit(self):
+        self.root.destroy()
 
 
 main_window = Tk()

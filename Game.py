@@ -338,13 +338,13 @@ class TicTacToe:
 
             # Right Column
             elif self.board[2][2] == self.board[0][2] and self.board[2][2] == self.board[1][2]:
-                self.game_log.append("Player {} match the right column!".format(self.current_player))
-                self.game_log.append("Player {} wins!".format(self.current_player))
+                self.game_log.append("{} match the right column!".format(self.current_player))
+                self.game_log.append("{} wins!".format(self.current_player))
 
-                self.win_history.append("Game {}: Player {}"
+                self.win_history.append("Game {}: {}"
                                         .format(self.current_game, self.current_player))
 
-                messagebox.showinfo("", "Player {} match the right column!\n\nPlayer {} wins!"
+                messagebox.showinfo("", "{} match the right column!\n\n{} wins!"
                                     .format(self.current_player, self.current_player))
                 winner_declared = True
                 game_over = True
@@ -442,12 +442,12 @@ class TicTacToe:
         if winner_declared:
             self.current_game += 1
 
-            if self.current_player == 1:
+            if self.current_player == self.p1_ID:
                 self.p1_points += 1
-                self.player1_score.set("Player 1\n--------\n{}".format(self.p1_points))
+                self.player1_score.set("{}\n--------\n{}".format(self.p1_ID, self.p1_points))
             else:
                 self.p2_points += 1
-                self.player2_score.set("Player 2\n--------\n{}".format(self.p2_points))
+                self.player2_score.set("{}\n--------\n{}".format(self.p2_ID, self.p2_points))
 
         if game_over:
             replay = messagebox.askquestion("Rematch", "Play again?")
@@ -464,7 +464,7 @@ class TicTacToe:
         self.board = [[(' ') for i in range(3)] for i in range(3)]
         self.current_turn = 1
         self.current_player = self.p1_ID
-        self.player_turn_message.set("Player 1's Turn")
+        self.player_turn_message.set("{}'s Turn".format(self.current_player))
         self.canvas_00.delete(ALL)
         self.canvas_01.delete(ALL)
         self.canvas_02.delete(ALL)

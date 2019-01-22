@@ -1,13 +1,35 @@
-from tkinter import Tk, Canvas, Label, StringVar, BOTTOM, SUNKEN, W, X, Y, Menu, ALL, messagebox
+from tkinter import Tk, Canvas, Label, StringVar, BOTTOM, SUNKEN, W, X, Y, Menu, ALL, messagebox, TOP, LEFT, RIGHT
 
 
 class TicTacToe:
 
     def __init__(self, master):
         self.root = master
-        self.canvas = Canvas(master, width=300, height=300)
+
+        # ***** Scoreboard *****
+        self.player1_score = 0
+        self.player1_score = StringVar()
+        self.player1_score.set("Player 1: {}".format(self.player1_score))
+        self.p1_score_display = Label(self.root, textvariable=self.player1_score, bd=1, relief=SUNKEN, anchor=W)
+        self.p1_score_display.pack(side=LEFT, padx=2, fill=X)
+
+        self.player2_score = 0
+        self.player2_score = StringVar()
+        self.player2_score.set("Player 2: {}".format(self.player2_score))
+        self.p2_score_display = Label(self.root, textvariable=self.player2_score, bd=1, relief=SUNKEN, anchor=W)
+        self.p2_score_display.pack(side=RIGHT, padx=2, fill=X)
+
+        # ***** Bottom Player Message *****
+        self.player_turn_message = StringVar()
+        self.player_turn_message.set("Player 1's Turn")
+        self.player_turn = Label(self.root, textvariable=self.player_turn_message, bd=1, relief=SUNKEN)
+        self.player_turn.pack(side=BOTTOM, padx=2, fill=X)
+
+        # ***** Game Canvas *****
+        self.canvas = Canvas(master, width=500, height=500)
         self.canvas.pack()
 
+        # ***** Menu *****
         main_menu = Menu(master)
         master.config(menu=main_menu)
 
@@ -21,6 +43,7 @@ class TicTacToe:
         main_menu.add_cascade(label="Moves", menu=moves_menu)
         moves_menu.add_command(label="Game Log", command=self.display_game_log)
 
+        # ***** Board *****
         self.board = [[(' ') for i in range(3)] for i in range(3)]
 
         self.current_turn = 1
@@ -28,16 +51,7 @@ class TicTacToe:
 
         self.game_log = list()
 
-        self.player_turn_message = StringVar()
-        self.player_turn_message.set("Player 1's Turn")
-        self.player_turn = Label(main_window, textvariable=self.player_turn_message, bd=1, relief=SUNKEN, anchor=W)
-        self.player_turn.pack(side=BOTTOM, padx=2, fill=X)
-
-        self.canvas.create_line(100, 0, 100, 300)
-        self.canvas.create_line(200, 0, 200, 300)
-        self.canvas.create_line(0, 100, 300, 100)
-        self.canvas.create_line(0, 200, 300, 200)
-
+        # ***** Colorized Board *****
         self.canvas_00 = Canvas(self.canvas, width=100, height=100, bg='red')
         self.canvas_00.bind("<Button-1>", self.mark00)
         self.canvas_00.grid(row=0, column=0)
@@ -73,6 +87,7 @@ class TicTacToe:
         self.canvas_22 = Canvas(self.canvas, width=100, height=100, bg='green')
         self.canvas_22.bind("<Button-1>", self.mark22)
         self.canvas_22.grid(row=2, column=2)
+
 
     def mark00(self, event):
         if self.board[0][0] == ' ':
